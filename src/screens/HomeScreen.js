@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import Strings from '../consts/Strings';
 import Styles from '../consts/Styles';
+import { connect } from 'react-redux';
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
   static navigationOptions = {
     header: null
   };
@@ -11,8 +12,15 @@ export default class HomeScreen extends Component {
   render() {
     return (
       <View style={Styles.mainContainer}>
-        <Text> {Strings.appTitle} asdasd</Text>
+        <Text>
+          {Strings.appTitle} URL: {this.props.url}
+        </Text>
       </View>
     );
   }
 }
+const mapStateToProps = state => ({
+  url: state.url ? state.url : Strings.mainUrl
+});
+
+export default connect(mapStateToProps)(HomeScreen);
