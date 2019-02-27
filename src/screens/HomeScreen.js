@@ -15,7 +15,7 @@ class HomeScreen extends Component {
     return (
       <View style={Styles.mainContainer}>
         <Text>
-          {Strings.appTitle} URL: {this.props.url}
+          {Strings.appTitle} URaL: {this.props.url}
         </Text>
         <TouchableOpacity onPress={()=> navigate("Settings") }>
           <Text>Do Ustawien</Text>
