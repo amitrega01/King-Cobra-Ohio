@@ -4,9 +4,11 @@ import HomeScreen from './src/screens/HomeScreen';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './src/reducer';
+import Settings from './src/screens/Settings';
 
 const MainNavigator = createStackNavigator({
-  Home: { screen: HomeScreen }
+  Home: { screen: HomeScreen },
+  Settings : {screen: Settings}
 });
 const AppContainer = createAppContainer(MainNavigator);
 const store = createStore(reducer);
