@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import Strings from '../consts/Strings';
 import Styles from '../consts/Styles';
 import { connect } from 'react-redux';
@@ -10,11 +10,16 @@ class HomeScreen extends Component {
   };
 
   render() {
+    
+    const {navigate} = this.props.navigation;
     return (
       <View style={Styles.mainContainer}>
         <Text>
           {Strings.appTitle} URL: {this.props.url}
         </Text>
+        <TouchableOpacity onPress={()=> navigate("Settings") }>
+          <Text>Do Ustawien</Text>
+        </TouchableOpacity>
       </View>
     );
   }
