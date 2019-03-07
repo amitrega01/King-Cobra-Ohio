@@ -18,7 +18,7 @@ class HomeScreen extends Component {
           {Strings.appTitle} URaL: {this.props.url}
         </Text>
         <TouchableOpacity onPress={()=> navigate("Settings") }>
-          <Text>Do Ustawien</Text>
+          <Text>Test</Text>
         </TouchableOpacity>
       </View>
     );
