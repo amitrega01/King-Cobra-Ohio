@@ -8,8 +8,7 @@ rp(url, function (error, response, html) {
     $('div.tree-right').each(function(i, element){
       var resultHTML = $(this).prev();
       var title = resultHTML.text();
-      var rssURL = resultHTML.getAttribute('href');
-
+      var rssURL = resultHTML.attr('a href');
     var metaData = {
       channel: title,
       url: rssURL
