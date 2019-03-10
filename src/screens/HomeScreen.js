@@ -3,6 +3,7 @@ import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
 import Strings from '../consts/Strings';
 import Styles from '../consts/Styles';
 import { connect } from 'react-redux';
+import Header from '../components/Header';
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -10,16 +11,10 @@ class HomeScreen extends Component {
   };
 
   render() {
-    
-    const {navigate} = this.props.navigation;
+    const { navigate } = this.props.navigation;
     return (
       <View style={Styles.mainContainer}>
-        <Text>
-          {Strings.appTitle} URaL: {this.props.url}
-        </Text>
-        <TouchableOpacity onPress={()=> navigate("Settings") }>
-          <Text>Test</Text>
-        </TouchableOpacity>
+        <Header onPress={() => navigate('Settings')} />
       </View>
     );
   }
