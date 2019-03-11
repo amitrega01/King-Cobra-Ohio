@@ -22,20 +22,16 @@ export default class Header extends Component {
         </View>
         <FlatList
           style={styles.list}
-          data={[
-            { title: 'RSS1', link: 'link', active: true },
-            { title: 'RSS2', link: 'link', active: false },
-            { title: 'RSS3', link: 'link', active: false }
-          ]}
+          data={this.props.channels}
           horizontal={true}
           renderItem={({ item }) =>
             item.active ? (
               <TouchableOpacity style={styles.btnWrap}>
-                <Text style={styles.btnText}>{item.title}</Text>
+                <Text style={styles.btnText}>{item.name}</Text>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity style={styles.btnWrapNotActive}>
-                <Text style={styles.btnTextNotActive}>{item.title}</Text>
+                <Text style={styles.btnTextNotActive}>{item.name}</Text>
               </TouchableOpacity>
             )
           }

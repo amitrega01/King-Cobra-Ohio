@@ -14,13 +14,17 @@ class HomeScreen extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={Styles.mainContainer}>
-        <Header onPress={() => navigate('Settings')} />
+        <Header
+          channels={this.props.channels}
+          onPress={() => navigate('Settings')}
+        />
       </View>
     );
   }
 }
 const mapStateToProps = state => ({
-  url: state.url ? state.url : Strings.mainUrl
+  url: state.url ? state.url : Strings.mainUrl,
+  channels: state.channels
 });
 
 export default connect(mapStateToProps)(HomeScreen);
