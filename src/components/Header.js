@@ -9,7 +9,6 @@ import {
 import Strings from '../consts/Strings';
 import Colors from '../consts/Colors';
 import { Ionicons } from '@expo/vector-icons';
-
 export default class Header extends Component {
   render() {
     return (
@@ -30,7 +29,10 @@ export default class Header extends Component {
                 <Text style={styles.btnText}>{item.name}</Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity style={styles.btnWrapNotActive}>
+              <TouchableOpacity
+                style={styles.btnWrapNotActive}
+                onPress={this.setAsActive(item.id)}
+              >
                 <Text style={styles.btnTextNotActive}>{item.name}</Text>
               </TouchableOpacity>
             )
@@ -40,6 +42,7 @@ export default class Header extends Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: Colors.mainColor,
