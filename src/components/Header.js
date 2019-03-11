@@ -9,7 +9,9 @@ import {
 import Strings from '../consts/Strings';
 import Colors from '../consts/Colors';
 import { Ionicons } from '@expo/vector-icons';
-export default class Header extends Component {
+import { connect } from 'react-redux';
+import RssChannelButton from './RssChannelButton';
+class Header extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
@@ -23,23 +25,25 @@ export default class Header extends Component {
           style={styles.list}
           data={this.props.channels}
           horizontal={true}
+          keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) =>
-            item.active ? (
-              <TouchableOpacity style={styles.btnWrap}>
-                <Text style={styles.btnText}>{item.name}</Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity style={styles.btnWrapNotActive}>
-                <Text style={styles.btnTextNotActive}>{item.name}</Text>
-              </TouchableOpacity>
-            )
-          }
+          renderItem={({ item }) => (
+            <RssChannelButton
+              name={item.name}
+              isActive={item.isActive}
+              id={item.id}
+            />
+          )}
         />
       </View>
     );
   }
 }
+const mapStateToProps = state => ({
+  channels: state.channels
+});
+
+export default connect(mapStateToProps)(Header);
 
 const styles = StyleSheet.create({
   wrapper: {
