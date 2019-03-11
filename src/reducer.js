@@ -1,28 +1,25 @@
+import rssFetch from './utils/rssFetch';
+
 const initialState = {
+  url: '',
   channels: [
     {
       id: 1,
-      url: 'url',
+      url: 'asd',
       name: 'KANAL1',
-      active: true
+      isActive: true
     },
     {
       id: 2,
-      url: 'url',
+      url: 'asd',
       name: 'KANAL2',
-      active: false
+      isActive: false
     },
     {
       id: 3,
-      url: 'url',
+      url: 'asd',
       name: 'KANAL3',
-      active: false
-    },
-    {
-      id: 4,
-      url: 'url',
-      name: 'KANAL4',
-      active: false
+      isActive: false
     }
   ]
 };
@@ -30,11 +27,21 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'SET_ACTIVE': {
-      return state.channels.map(channel =>
-        channel.id == action.id
-          ? (channel.active = true)
-          : (channel.active = false)
-      );
+      return {
+        url: state.url,
+        channels: state.channels.map(channel =>
+          channel.id === action.id
+            ? { ...channel, isActive: true }
+            : { ...channel, isActive: false }
+        )
+      };
+
+      break;
+    }
+    case 'FIRST_RUN': {
+      state.url = action.url;
+
+      return state;
       break;
     }
     default:
