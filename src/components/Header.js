@@ -69,26 +69,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 16,
     paddingTop: 16
-  },
-  btnText: {
-    color: 'rgba(0,0,0,0.75)',
-    fontSize: 16
-  },
-  btnTextNotActive: {
-    color: '#fff',
-    fontSize: 16
-  },
-  btnWrap: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingVertical: 4,
-    borderRadius: 16,
-    marginRight: 8
-  },
-  btnWrapNotActive: {
-    paddingHorizontal: 16,
-    paddingVertical: 4,
-    borderRadius: 16,
-    marginRight: 8
   }
 });
