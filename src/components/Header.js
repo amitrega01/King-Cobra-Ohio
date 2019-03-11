@@ -23,16 +23,14 @@ export default class Header extends Component {
           style={styles.list}
           data={this.props.channels}
           horizontal={true}
+          showsHorizontalScrollIndicator={false}
           renderItem={({ item }) =>
             item.active ? (
               <TouchableOpacity style={styles.btnWrap}>
                 <Text style={styles.btnText}>{item.name}</Text>
               </TouchableOpacity>
             ) : (
-              <TouchableOpacity
-                style={styles.btnWrapNotActive}
-                onPress={this.setAsActive(item.id)}
-              >
+              <TouchableOpacity style={styles.btnWrapNotActive}>
                 <Text style={styles.btnTextNotActive}>{item.name}</Text>
               </TouchableOpacity>
             )
@@ -46,13 +44,13 @@ export default class Header extends Component {
 const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: Colors.mainColor,
-    padding: 16,
-    paddingTop: 44,
+    paddingTop: 24,
     flexDirection: 'column',
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16
   },
   row: {
+    padding: 16,
     justifyContent: 'space-between',
     alignContent: 'center',
     flexDirection: 'row'
@@ -65,6 +63,7 @@ const styles = StyleSheet.create({
   },
   list: {
     flexDirection: 'row',
+    padding: 16,
     paddingTop: 16
   },
   btnText: {
