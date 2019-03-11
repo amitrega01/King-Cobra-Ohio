@@ -1,19 +1,25 @@
-const rp = require('request-promise');
-const cheerio = require('cheerio');
+const rp = require('request-promise-native');
+const $ = require('cheerio');
 const url = "https://www.rmf.fm/rss/"
 
-rp(url, function (error, response, html) {
-  if (!error && response.statusCode == 200) {
-    var $ = cheerio.load(html);
-    $('div.tree-right').each(function(i, element){
-      var resultHTML = $(this).prev();
-      var title = resultHTML.text();
-      var rssURL = resultHTML.attr('a href');
-    var metaData = {
-      channel: title,
-      url: rssURL
+rp(url)
+  .then(function(html){
+    const urls = [];
+    for (let i = 0; i < $('div a', html).length; i++) {
+     var temp =$('div a', html)[i].attribs.href;
+     urls.push(temp+"");
+     
+ 
     }
-    console.log(metaData);
+    let rss = [];
+    urls.forEach((item)=> {
+      if(item.includes("feed") ||item.includes("rss") ) rss.push(item)
     });
-  }
-});
+    console.log(rss)
+  })
+  .catch(function(err){
+    console.log("err" + err)
+  });
+
+
+    
