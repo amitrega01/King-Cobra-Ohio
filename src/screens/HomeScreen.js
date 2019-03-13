@@ -1,36 +1,62 @@
 import React, { Component } from 'react';
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native';
+import { Text, AsyncStorage, View } from 'react-native';
 import Strings from '../consts/Strings';
 import Styles from '../consts/Styles';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
+import rssFetch from '../utils/rssFetch';
 
+const cheerio = require('cheerio-without-node-native');
 class HomeScreen extends Component {
   static navigationOptions = {
     header: null
   };
-  componentWillMount = () => {
-    this.firstRun();
-  };
-  firstRun = () => {
-    if (!this.props.url) {
+  constructor(props) {
+    super(props);
+  }
+
+  async componentDidMount() {
+    console.log('FIRST RUN');
+    var localStateJSON = await AsyncStorage.getItem('STATE1');
+    var localState = JSON.parse(localStateJSON);
+    console.log(localState);
+    if (localState == null) {
+      console.log('NIE MA W PAMIECI KANALOW');
+      var rss = await rssFetch(Strings.mainUrl);
+      for (let index = 0; index < rss.length; index++) {
+        rss[index] = {
+          id: index,
+          name: 'KANAL' + (index + 1),
+          url: rss[index],
+          isActive: index == 0 ? true : false
+        };
+      }
+      this.props.dispatch({ type: 'UPDATE', url: Strings.mainUrl, rss: rss });
+    } else {
+      console.log('SA W PAMIECI KANALOW');
       this.props.dispatch({
-        type: 'FIRST_RUN',
-        url: Strings.mainUrl
+        type: 'GET_STATE_FROM_STORAGE',
+        localState: localState
       });
     }
-  };
+  }
+
+  firstRun = () => {};
   render() {
     const { navigate } = this.props.navigation;
     return (
       <View style={Styles.mainContainer}>
-        <Header onPress={() => navigate('Settings')} />
+        <Header
+          channels={this.props.channels}
+          onPress={() => navigate('Settings')}
+        />
       </View>
     );
   }
 }
 const mapStateToProps = state => ({
-  url: state.url
+  url: state.url,
+  channels: state.channels
 });
 
 export default connect(mapStateToProps)(HomeScreen);
