@@ -9,7 +9,9 @@ import {
 import Strings from '../consts/Strings';
 import Colors from '../consts/Colors';
 import { Ionicons } from '@expo/vector-icons';
-export default class Header extends Component {
+import { connect } from 'react-redux';
+import RssChannelButton from './RssChannelButton';
+class Header extends Component {
   render() {
     return (
       <View style={styles.wrapper}>
@@ -23,23 +25,23 @@ export default class Header extends Component {
           style={styles.list}
           data={this.props.channels}
           horizontal={true}
+          keyExtractor={item => item.id}
           showsHorizontalScrollIndicator={false}
-          renderItem={({ item }) =>
-            item.active ? (
-              <TouchableOpacity style={styles.btnWrap}>
-                <Text style={styles.btnText}>{item.name}</Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity style={styles.btnWrapNotActive}>
-                <Text style={styles.btnTextNotActive}>{item.name}</Text>
-              </TouchableOpacity>
-            )
-          }
+          renderItem={({ item }) => (
+            <RssChannelButton
+              name={item.name}
+              isActive={item.isActive}
+              id={item.id}
+            />
+          )}
         />
       </View>
     );
   }
 }
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps)(Header);
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -65,26 +67,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 16,
     paddingTop: 16
-  },
-  btnText: {
-    color: 'rgba(0,0,0,0.75)',
-    fontSize: 16
-  },
-  btnTextNotActive: {
-    color: '#fff',
-    fontSize: 16
-  },
-  btnWrap: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingVertical: 4,
-    borderRadius: 16,
-    marginRight: 8
-  },
-  btnWrapNotActive: {
-    paddingHorizontal: 16,
-    paddingVertical: 4,
-    borderRadius: 16,
-    marginRight: 8
   }
 });
