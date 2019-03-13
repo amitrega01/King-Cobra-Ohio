@@ -39,9 +39,7 @@ class Header extends Component {
     );
   }
 }
-const mapStateToProps = state => ({
-  channels: state.channels
-});
+const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps)(Header);
 
