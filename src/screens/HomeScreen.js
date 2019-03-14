@@ -33,7 +33,7 @@ class HomeScreen extends Component {
       }
       this.props.dispatch({ type: 'UPDATE', url: Strings.mainUrl, rss: rss });
     } else {
-      console.log('SA W PAMIECI KANALOW');
+      console.log('SA W PAMIECI ');
       this.props.dispatch({
         type: 'GET_STATE_FROM_STORAGE',
         localState: localState
