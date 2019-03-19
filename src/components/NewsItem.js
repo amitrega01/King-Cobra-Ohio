@@ -24,7 +24,7 @@ const styles =  StyleSheet.create({
 
         Data: {
           color: 'rgb(114, 114, 142)',
-          justifyContent: 'space-between',
+          alignItems: 'stretch'
         }       
       
 });
@@ -34,7 +34,7 @@ export default class NewsItem extends Component {
   render() {
     return (
       <View style = {styles.container}>
-        <View style = {{flexDirection: 'row'}}>
+        <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={styles.Header}>{this.props.title}</Text> 
           <Text style={styles.Data}>{this.props.date}</Text>
         </View>
