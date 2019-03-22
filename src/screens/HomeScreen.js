@@ -5,6 +5,7 @@ import Styles from '../consts/Styles';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import rssFetch from '../utils/rssFetch';
+import NewsItem from '../components/NewsItem';
 
 const cheerio = require('cheerio-without-node-native');
 class HomeScreen extends Component {
@@ -49,6 +50,31 @@ class HomeScreen extends Component {
         <Header
           channels={this.props.channels}
           onPress={() => navigate('Settings')}
+        />
+        <FlatList
+          //TODO: data ma byc lista ktora jest aktywana
+          data={[
+            {
+              title: 'TYTUL',
+              date: 'data',
+              source: 'zrodlo',
+              content: 'LOREM IPSUm'
+            },
+            {
+              title: 'TYTUL',
+              date: 'data',
+              source: 'zrodlo',
+              content: 'LOREM IPSUm'
+            }
+          ]}
+          renderItem={item => (
+            <NewsItem
+              title={item.title}
+              date={item.date}
+              name={item.source}
+              content={item.content}
+            />
+          )}
         />
       </View>
     );
