@@ -3,6 +3,7 @@ import { Modal, Button, Text, TextInput ,StyleSheet, View, TouchableOpacity, Tou
 import Strings from '../consts/Strings';
 import Styles from '../consts/Styles';
 import { connect } from 'react-redux';
+import NewRSSButton from '../components/NewRSSButton';
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -24,7 +25,6 @@ class HomeScreen extends Component {
     return (
       
       <View style={Styles.mainContainer}>
-      <Button style={{marginTop: 22}} onPress={()=> {this.setModalVisible(!this.state.modalVisible)}} title="Add new channel" color="#841784"/>
         <Text>
           {Strings.appTitle} URL: {this.props.url}
         </Text>
@@ -50,6 +50,7 @@ class HomeScreen extends Component {
             </View>
           </View>
         </Modal>
+        <NewRSSButton onPress={()=> {this.setModalVisible(this.state.modalVisible)}}/>
       </View>
     );
   }
