@@ -21,5 +21,5 @@ export default async function rssFetch(url) {
       rss.push(item);
   });
   console.log('Pobrano RSS');
-  return rss;
+  return rss.slice(0, 8);
 }
