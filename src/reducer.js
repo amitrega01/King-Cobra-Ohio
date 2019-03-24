@@ -12,7 +12,8 @@ export default (state = initialState, action) => {
           channel.id === action.id
             ? { ...channel, isActive: true }
             : { ...channel, isActive: false }
-        )
+        ),
+        active: state.channels.filter(item => item.id == action.id).news
       };
 
       break;
@@ -20,7 +21,8 @@ export default (state = initialState, action) => {
     case 'UPDATE': {
       var tmpState = {
         url: action.url,
-        channels: action.rss
+        channels: action.rss,
+        active: action.active
       };
       saveStateToStorage(tmpState);
       return tmpState;
