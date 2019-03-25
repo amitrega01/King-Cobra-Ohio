@@ -9,7 +9,8 @@ import rssFetch from '../utils/rssFetch';
 const cheerio = require('cheerio-without-node-native');
 class HomeScreen extends Component {
   static navigationOptions = {
-    header: null
+    header: null,
+    
   };
   constructor(props) {
     super(props);
@@ -45,6 +46,7 @@ class HomeScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
+      
       <View style={Styles.mainContainer}>
         <Header
           channels={this.props.channels}
