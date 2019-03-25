@@ -1,69 +1,42 @@
-import React, { Component } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-
-
-
-const styles =  StyleSheet.create({
-        Header : {
-          fontSize: 30,
-          fontWeight: 'bold',
-          flexDirection: 'row',
-          justifyContent: 'space-between'
-          
-        },
-
-        container: {         
-          borderRadius: 10,
-          borderWidth: 1,
-          borderColor: 'rgb(114, 114, 142)',
-          padding: 10,
-             
-          
-        },
-
-        Source: {
-          color: 'rgb(114, 114, 142)'
-        },
-
-        Data: {
-          color: 'rgb(114, 114, 142)',
-          alignItems: 'stretch'
-        },
-        
-        Shadow: {
-          shadowColor: "#000",
-          shadowOffset: {
-            width: 0,
-            height: 3,
-          },
-          shadowOpacity: 0.27,
-          shadowRadius: 4.65,
-          elevation: 4,
-        }
-      
-        
-});
-
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class NewsItem extends Component {
   render() {
-    
     return (
-      <View style = {[styles.container, styles.Shadow]}>
-        <View style = {{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={styles.Header}>{this.props.title}</Text> 
+      <TouchableOpacity activeOpacity={0.6} style={styles.container}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Text style={styles.Header}>{this.props.title}</Text>
           <Text style={styles.Data}>{this.props.date}</Text>
         </View>
-        <Text style = {styles.Source}>{this.props.name} </Text>       
+        <Text style={styles.Source}>{this.props.name} </Text>
         <Text>{this.props.content}</Text>
-      </View>
-    )
+      </TouchableOpacity>
+    );
   }
 }
+const styles = StyleSheet.create({
+  container: {
+    padding: 16,
+    borderRadius: 16,
+    borderWidth: 0.5,
+    borderColor: 'rgba(0,0,0,0.25)',
+    marginVertical: 8,
+    marginHorizontal: 12
+  },
+  Header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
 
+  Source: {
+    color: 'rgb(114, 114, 142)'
+  },
 
-
-
-
-
-
+  Data: {
+    color: 'rgb(114, 114, 142)',
+    alignItems: 'stretch'
+  }
+});

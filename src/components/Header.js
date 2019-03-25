@@ -29,7 +29,9 @@ class Header extends Component {
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <RssChannelButton
+              callback={this.props.callback}
               name={item.name}
+              fullName={item.fullName}
               isActive={item.isActive}
               id={item.id}
             />
