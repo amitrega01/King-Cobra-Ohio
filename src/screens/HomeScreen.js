@@ -6,17 +6,7 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import rssFetch from '../utils/rssFetch';
 import { NewsList } from '../containers/NewsList';
-import Colors from '../consts/Colors';
-import * as Progress from 'react-native-progress';
-
-let list = (
-  <Progress.Circle
-    size={30}
-    indeterminate={true}
-    color={Colors.mainColor}
-    style={{ felx: 1 }}
-  />
-);
+let list = null;
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -24,10 +14,25 @@ class HomeScreen extends Component {
   };
   constructor(props) {
     super(props);
+
     this.state = {
+      progress: 0.0,
       loaded: false,
       news: []
     };
+
+    list = (
+      <Text
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignSelf: 'center',
+          alignContent: 'center'
+        }}
+      >
+        Ładowanie
+      </Text>
+    );
   }
   async updateState() {
     await rssFetch(Strings.mainUrl).then(rss => {
