@@ -32,15 +32,20 @@ export default async function rssFetch(url) {
   }
   for (let i = 0; i < rss.length; i++) {
     const channel = rss[i];
-    await fetch(channel.url)
-      .then(response => response.text())
-      .then(responseData => rssParser.parse(responseData))
-      .then(rss => {
-        channel.fullName = rss.title;
-        channel.name = rss.title.split(' ')[0];
-        channel.news = rss.items;
-      });
+    channel = await newsFetch(channel);
   }
   console.table(rss);
   return rss;
+}
+
+export async function newsFetch(channel) {
+  await fetch(channel.url)
+    .then(response => response.text())
+    .then(responseData => rssParser.parse(responseData))
+    .then(rss => {
+      channel.fullName = rss.title;
+      channel.name = rss.title.split(' ')[0];
+      channel.news = rss.items;
+    });
+  return channel;
 }
