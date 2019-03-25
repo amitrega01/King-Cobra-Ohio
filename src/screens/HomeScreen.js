@@ -6,13 +6,21 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import rssFetch from '../utils/rssFetch';
 import { NewsList } from '../containers/NewsList';
+import Colors from '../consts/Colors';
+import * as Progress from 'react-native-progress';
 
-let list = <Text>Ladowanie</Text>;
+let list = (
+  <Progress.Circle
+    size={30}
+    indeterminate={true}
+    color={Colors.mainColor}
+    style={{ felx: 1 }}
+  />
+);
 
 class HomeScreen extends Component {
   static navigationOptions = {
-    header: null,
-    
+    header: null
   };
   constructor(props) {
     super(props);
@@ -21,7 +29,33 @@ class HomeScreen extends Component {
       news: []
     };
   }
-
+  async updateState() {
+    await rssFetch(Strings.mainUrl).then(rss => {
+      var active = rss.find(item => item.isActive == true).news;
+      console.log('ACTIVE');
+      console.table(active);
+      this.props.dispatch({
+        type: 'UPDATE',
+        lastUpdate: Date.now(),
+        url: Strings.mainUrl,
+        rss: rss,
+        active: active
+      });
+      list = <NewsList news={active} />;
+      this.setState({
+        loaded: true
+      });
+    });
+  }
+  async checkLastUpdate(localState) {
+    //7200000 = 2h
+    if (localState.lastUpdate + Strings.updateInterval > Date.now())
+      console.log('nie trzeba updtejtowac');
+    else {
+      console.log('Wymagany updejt');
+      await this.updateState();
+    }
+  }
   async componentWillMount() {
     console.log('FIRST RUN');
     await AsyncStorage.getItem('STATE1').then(async localStateJSON => {
@@ -29,21 +63,7 @@ class HomeScreen extends Component {
       console.log(localState);
       if (localState == null) {
         console.log('NIE MA W PAMIECI KANALOW');
-        await rssFetch(Strings.mainUrl).then(rss => {
-          var active = rss.find(item => item.isActive == true).news;
-          console.log('ACTIVE');
-          console.table(active);
-          this.props.dispatch({
-            type: 'UPDATE',
-            url: Strings.mainUrl,
-            rss: rss,
-            active: active
-          });
-          list = <NewsList news={active} />;
-          this.setState({
-            loaded: true
-          });
-        });
+        this.updateState();
       } else {
         console.log('SA W PAMIECI');
         this.props.dispatch({
@@ -55,8 +75,10 @@ class HomeScreen extends Component {
             news={this.props.channels.find(x => x.isActive == true).news}
           />
         );
-        this.setState({
-          loaded: true
+        await this.checkLastUpdate(localState).then(() => {
+          this.setState({
+            loaded: true
+          });
         });
       }
     });
@@ -66,7 +88,6 @@ class HomeScreen extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-      
       <View style={Styles.mainContainer}>
         <Header
           callback={id => {

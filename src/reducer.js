@@ -8,6 +8,8 @@ export default (state = initialState, action) => {
     case 'SET_ACTIVE': {
       return {
         url: state.url,
+
+        lastUpdate: state.lastUpdate,
         channels: state.channels.map(channel =>
           channel.id === action.id
             ? { ...channel, isActive: true }
@@ -20,6 +22,7 @@ export default (state = initialState, action) => {
     }
     case 'UPDATE': {
       var tmpState = {
+        lastUpdate: action.lastUpdate,
         url: action.url,
         channels: action.rss,
         active: action.active
