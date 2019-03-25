@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { FlatList, Text, AsyncStorage, View } from 'react-native';
+import { Text, AsyncStorage, View } from 'react-native';
 import Strings from '../consts/Strings';
 import Styles from '../consts/Styles';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import rssFetch from '../utils/rssFetch';
-import NewsItem from '../components/NewsItem';
 import { NewsList } from '../containers/NewsList';
-
-const cheerio = require('cheerio-without-node-native');
 
 let list = <Text>Ladowanie</Text>;
 
@@ -64,7 +61,6 @@ class HomeScreen extends Component {
     });
   }
 
-  firstRun = () => {};
   render() {
     const { navigate } = this.props.navigation;
 
