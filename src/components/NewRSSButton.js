@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
 export default class NewRSSButton extends Component {
   render() {
     return (
-      <View>
-        <TouchableOpacity
-          style={styles.wrapper}
-          onPress={this.props.onPress}
-          title="+"
-          color="#841784"
-        >
-          <Text>+</Text>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        onPress={this.props.onPress}
+        title="+"
+        color="#841784"
+        style={{ paddingHorizontal: 8 }}
+      >
+        <Ionicons name="md-add" size={32} color="white" />
+      </TouchableOpacity>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  wrapper: {
-    padding: 8
-  }
-});
