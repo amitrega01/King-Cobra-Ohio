@@ -15,6 +15,7 @@ export class NewsList extends Component {
         <FlatList
           data={this.props.news}
           extraData={this.props}
+          keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
             <NewsItem
               title={item.title}

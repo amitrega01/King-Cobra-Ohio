@@ -51,7 +51,7 @@ class Header extends Component {
           style={styles.list}
           data={this.props.channels}
           horizontal={true}
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => (
             <RssChannelButton
