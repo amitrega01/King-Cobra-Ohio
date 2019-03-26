@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: Colors.mainColor,
     paddingTop: 24,
+    elevation: 4,
     flexDirection: 'column',
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16
@@ -98,6 +99,7 @@ const styles = StyleSheet.create({
   list: {
     flexDirection: 'row',
     padding: 16,
-    paddingTop: 16
+    paddingTop: 16,
+    paddingRight: 20
   }
 });
