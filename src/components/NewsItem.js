@@ -26,7 +26,7 @@ const styles =  StyleSheet.create({
         },
         
         Shadow: {          
-          elevation: 6,
+          elevation: 7,
         },
 
         Background: {
