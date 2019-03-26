@@ -20,7 +20,7 @@ export class NewsList extends Component {
             <NewsItem
               title={item.title}
               date={item.published}
-              name={item.links[0].url}
+              source={item.links[0].url}
               content={item.description}
             />
           )}

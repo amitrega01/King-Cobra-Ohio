@@ -104,7 +104,6 @@ class HomeScreen extends Component {
           channels={this.props.channels}
           onPress={() => navigate('Settings')}
         />
-        <Text>{this.state.active}</Text>
         {list}
       </View>
     );
