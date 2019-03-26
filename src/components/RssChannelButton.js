@@ -8,7 +8,7 @@ class RssChannelButton extends Component {
       return (
         //TODO: wariant aktywny i nie aktywny
         <TouchableOpacity style={styles.active}>
-          <Text style={styles.activeText}>{this.props.name}</Text>
+          <Text style={styles.activeText}>{this.props.fullName}</Text>
         </TouchableOpacity>
       );
     } else {
@@ -20,6 +20,7 @@ class RssChannelButton extends Component {
               type: 'SET_ACTIVE',
               id: this.props.id
             });
+            this.props.callback(this.props.id);
           }}
         >
           <Text style={styles.inActiveText}>{this.props.name}</Text>
