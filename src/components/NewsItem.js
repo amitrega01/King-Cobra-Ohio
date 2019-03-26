@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 const styles =  StyleSheet.create({
         Header : {
-          fontSize: 25,
+          fontSize: 22,
           fontWeight: 'bold',
           flexDirection: 'row',
           justifyContent: 'space-between'
