@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
 class Settings extends Component {
+    this.state = { darkMode: false };
+  CheckBox,
   static navigationOptions = {
     header: null
   };
@@ -65,6 +67,19 @@ class Settings extends Component {
               });
               navigate('Home');
             }}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            padding: 16,
+            justifyContent: 'space-between'
+          }}
+        >
+          <Text>Dark mode</Text>
+          <CheckBox
+            value={this.state.darkMode}
+            onValueChange={value => this.setState({ darkMode: value })}
           />
         </View>
       </View>
