@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import { Text, AsyncStorage, View } from 'react-native';
+import { ActivityIndicator, AsyncStorage, View } from 'react-native';
 import Strings from '../consts/Strings';
 import Styles from '../consts/Styles';
 import { connect } from 'react-redux';
 import Header from '../components/Header';
 import rssFetch from '../utils/rssFetch';
 import { NewsList } from '../containers/NewsList';
+import { BackgroundFetch, TaskManager } from 'expo';
+import Colors from '../consts/Colors';
+
 let list = null;
+
+const TASK_NAME = 'background-fetch';
 
 class HomeScreen extends Component {
   static navigationOptions = {
@@ -22,16 +27,11 @@ class HomeScreen extends Component {
     };
 
     list = (
-      <Text
-        style={{
-          flex: 1,
-          justifyContent: 'center',
-          alignSelf: 'center',
-          alignContent: 'center'
-        }}
-      >
-        Ładowanie
-      </Text>
+      <ActivityIndicator
+        style={{ flex: 1 }}
+        size="large"
+        color={Colors.mainColor}
+      />
     );
   }
   async updateState() {
@@ -87,6 +87,8 @@ class HomeScreen extends Component {
         });
       }
     });
+
+    await BackgroundFetch.registerTaskAsync(TASK_NAME);
   }
 
   render() {
@@ -109,7 +111,22 @@ class HomeScreen extends Component {
     );
   }
 }
+
+TaskManager.defineTask(TASK_NAME, () => {
+  try {
+    console.log('RECIVING DATA');
+    const receivedNewData = 'Asd';
+    return receivedNewData
+      ? BackgroundFetch.Result.NewData
+      : BackgroundFetch.Result.NoData;
+  } catch (error) {
+    console.log(error.message);
+    return BackgroundFetch.Result.Failed;
+  }
+});
+
 const mapStateToProps = state => ({
+  state: state,
   url: state.url,
   channels: state.channels,
   active: state.active

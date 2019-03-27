@@ -8,7 +8,7 @@ import Settings from './src/screens/Settings';
 
 const MainNavigator = createStackNavigator({
   Home: { screen: HomeScreen },
-  Settings : {screen: Settings}
+  Settings: { screen: Settings }
 });
 const AppContainer = createAppContainer(MainNavigator);
 const store = createStore(reducer);
