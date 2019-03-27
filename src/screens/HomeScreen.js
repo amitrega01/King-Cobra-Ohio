@@ -17,6 +17,7 @@ class HomeScreen extends Component {
   static navigationOptions = {
     header: null
   };
+
   constructor(props) {
     super(props);
 
@@ -34,6 +35,7 @@ class HomeScreen extends Component {
       />
     );
   }
+
   async updateState() {
     await rssFetch(Strings.mainUrl).then(rss => {
       var active = rss.find(item => item.isActive == true).news;
@@ -52,15 +54,19 @@ class HomeScreen extends Component {
       });
     });
   }
+
   async checkLastUpdate(localState) {
     //7200000 = 2h
-    if (localState.lastUpdate + this.props.interval > Date.now())
+    console.info('Hello');
+    console.log(localState.interval * 1);
+    if (localState.lastUpdate + localState.interval * 1 > Date.now()) {
       console.log('nie trzeba updtejtowac');
-    else {
+    } else {
       console.log('Wymagany updejt');
       await this.updateState();
     }
   }
+
   async componentWillMount() {
     console.log('FIRST RUN');
     await AsyncStorage.getItem('STATE1').then(async localStateJSON => {

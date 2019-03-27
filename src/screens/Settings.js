@@ -40,7 +40,7 @@ class Settings extends Component {
           <Text style={styles.headerText}>{Strings.settings}</Text>
         </View>
         <View style={styles.body}>
-          <Text style={styles.bodyText}>Aktualizuj co:</Text>
+          <Text style={styles.bodyText}>Aktualizuj co: (h)</Text>
           <TextInput
             style={styles.bodyText}
             value={this.state.interval.toString()}
