@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, Linking } from 'react-native';
 import HTML from 'react-native-render-html';
 import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
 export default class NewsItem extends Component {
@@ -7,7 +7,8 @@ export default class NewsItem extends Component {
     return (
       <TouchableOpacity
         style={[styles.container, styles.Shadow, styles.Background]}
-        onPress={() => alert(this.props.source)}
+        onPress={() => Linking.openURL(this.props.source)}
+        activeOpacity={0.8}
       >
         <Text style={styles.Header}>{this.props.title}</Text>
         <Text style={styles.Data}>{this.props.date}</Text>
