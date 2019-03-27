@@ -7,24 +7,28 @@ export default class Settings extends Component {
   };
   render() {
     return (
-      <View style={{paddingHorizontal: 80, 
-        paddingVertical: 300}}>
-        <View 
+      <View 
         style={{
-        
-        flexDirection: 'row'}}>
+          paddingHorizontal: 80, 
+          paddingVertical: 300}}
+        >
+
+        <View 
+          style={{
+            flexDirection: 'row'}}>
           
           <Text style={{flex: 1,}}>
-          Aktualizuj co:
+            Aktualizuj co:
           </Text>
+
           <TextInput
             style={{flex: 1}}
             maxLength = {3}
             placeholder='np. 1'
             keyboardType = 'numeric'
           />
-
         </View>
+        
         <View style={{paddingTop: 5}}>
           <Button title="Zapisz" onPress=""></Button>
         </View>
