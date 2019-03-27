@@ -23,22 +23,22 @@ class Header extends Component {
   }
   render() {
     return (
-      <View style={styles.wrapper}>
+      <View style={this.props.darkMode ? stylesDark.wrapper : styles.wrapper}>
         <View style={styles.row}>
           <Text style={styles.appTitleText}>{Strings.appTitle}</Text>
 
-          <NewRSSModal
+          {/* <NewRSSModal
             modalVisible={this.state.modalVisible}
             closeModal={() =>
               this.setState({ modalVisible: !this.state.modalVisible })
             }
-          />
+          /> */}
           <View style={styles.buttonRow}>
-            <NewRSSButton
+            {/* <NewRSSButton
               onPress={() =>
                 this.setState({ modalVisible: !this.state.modalVisible })
               }
-            />
+            /> */}
             <TouchableOpacity
               onPress={this.props.onPress}
               style={{ paddingHorizontal: 8 }}
@@ -67,7 +67,9 @@ class Header extends Component {
     );
   }
 }
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  darkMode: state.darkMode
+});
 
 export default connect(mapStateToProps)(Header);
 
@@ -101,5 +103,15 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingTop: 16,
     paddingRight: 20
+  }
+});
+const stylesDark = StyleSheet.create({
+  wrapper: {
+    backgroundColor: '#222',
+    paddingTop: 24,
+    elevation: 4,
+    flexDirection: 'column',
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16
   }
 });

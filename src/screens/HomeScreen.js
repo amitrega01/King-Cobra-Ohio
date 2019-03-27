@@ -101,7 +101,13 @@ class HomeScreen extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <View style={Styles.mainContainer}>
+      <View
+        style={
+          this.props.darkMode
+            ? { backgroundColor: '#000', flex: 1 }
+            : Styles.mainContainer
+        }
+      >
         <Header
           callback={id => {
             console.log('CALBBACk' + id);
@@ -136,7 +142,8 @@ const mapStateToProps = state => ({
   url: state.url,
   channels: state.channels,
   active: state.active,
-  interval: state.interval
+  interval: state.interval,
+  darkMode: state.darkMode
 });
 
 export default connect(mapStateToProps)(HomeScreen);
