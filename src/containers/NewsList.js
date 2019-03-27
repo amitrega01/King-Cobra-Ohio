@@ -11,7 +11,7 @@ export class NewsList extends Component {
   };
   render() {
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <FlatList
           data={this.props.news}
           extraData={this.props}
