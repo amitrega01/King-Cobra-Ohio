@@ -5,7 +5,8 @@ import {
   Text,
   StyleSheet,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  CheckBox
 } from 'react-native';
 import Strings from '../consts/Strings';
 import Colors from '../consts/Colors';
@@ -13,8 +14,6 @@ import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
 class Settings extends Component {
-    this.state = { darkMode: false };
-  CheckBox,
   static navigationOptions = {
     header: null
   };
@@ -31,8 +30,14 @@ class Settings extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <View>
-        <View style={styles.header}>
+      <View
+        style={
+          this.props.darkMode
+            ? { backgroundColor: '#000', flex: 1 }
+            : { flex: 1 }
+        }
+      >
+        <View style={this.props.darkMode ? stylesDark.header : styles.header}>
           <TouchableOpacity
             onPress={() => navigate('Home')}
             style={{ paddingVertical: 16, paddingLeft: 16 }}
@@ -41,10 +46,15 @@ class Settings extends Component {
           </TouchableOpacity>
           <Text style={styles.headerText}>{Strings.settings}</Text>
         </View>
+
         <View style={styles.body}>
-          <Text style={styles.bodyText}>Aktualizuj co: (h)</Text>
+          <Text
+            style={this.props.darkMode ? stylesDark.bodyText : styles.bodyText}
+          >
+            Aktualizuj co: (h)
+          </Text>
           <TextInput
-            style={styles.bodyText}
+            style={this.props.darkMode ? stylesDark.bodyText : styles.bodyText}
             value={this.state.interval.toString()}
             onChangeText={text => {
               this.setState({ interval: text });
@@ -52,6 +62,19 @@ class Settings extends Component {
             keyboardType="numeric"
           />
         </View>
+
+        <View style={styles.body}>
+          <Text
+            style={this.props.darkMode ? stylesDark.bodyText : styles.bodyText}
+          >
+            Dark mode
+          </Text>
+          <CheckBox
+            value={this.state.darkMode}
+            onValueChange={value => this.setState({ darkMode: value })}
+          />
+        </View>
+
         <View style={{ paddingTop: 5, paddingHorizontal: 30 }}>
           <Button
             color={Colors.mainColor}
@@ -67,19 +90,6 @@ class Settings extends Component {
               });
               navigate('Home');
             }}
-          />
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            padding: 16,
-            justifyContent: 'space-between'
-          }}
-        >
-          <Text>Dark mode</Text>
-          <CheckBox
-            value={this.state.darkMode}
-            onValueChange={value => this.setState({ darkMode: value })}
           />
         </View>
       </View>
@@ -113,7 +123,36 @@ const styles = StyleSheet.create({
     fontSize: 20
   }
 });
-//TUAJ SIE LACZY Z REDUXEM I POBIERAMY ZMIENNE Z GLOBALNEGO STANU KTORE SA NAM POTRZEBNE W TYM KOMPONENCIE
+
+const stylesDark = StyleSheet.create({
+  header: {
+    backgroundColor: '#222',
+    elevation: 4,
+    flexDirection: 'row',
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
+    paddingTop: 24
+  },
+  headerText: {
+    padding: 16,
+    fontWeight: 'bold',
+    fontSize: 24,
+    color: '#fff',
+    letterSpacing: 5
+  },
+  body: {
+    flexDirection: 'row',
+    padding: 16,
+    borderBottomWidth: 0.25,
+    borderColor: 'rgba(0,0,0,0.25)',
+    justifyContent: 'space-between'
+  },
+  bodyText: {
+    fontSize: 20,
+    color: '#ddd'
+  }
+});
+
 const mapStateToProps = state => ({
   interval: state.interval,
   darkMode: state.darkMode
