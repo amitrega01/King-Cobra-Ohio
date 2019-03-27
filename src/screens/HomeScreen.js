@@ -54,7 +54,7 @@ class HomeScreen extends Component {
   }
   async checkLastUpdate(localState) {
     //7200000 = 2h
-    if (localState.lastUpdate + Strings.updateInterval > Date.now())
+    if (localState.lastUpdate + this.props.interval > Date.now())
       console.log('nie trzeba updtejtowac');
     else {
       console.log('Wymagany updejt');
@@ -129,7 +129,8 @@ const mapStateToProps = state => ({
   state: state,
   url: state.url,
   channels: state.channels,
-  active: state.active
+  active: state.active,
+  interval: state.interval
 });
 
 export default connect(mapStateToProps)(HomeScreen);
