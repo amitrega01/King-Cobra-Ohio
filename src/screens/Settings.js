@@ -26,21 +26,14 @@ class Settings extends Component {
           <Text style={styles.headerText}>{Strings.settings}</Text>
         </View>
 
-        {/* TES TYLE PRZENIES NA DOL PLIKU, TAK JAK JEST TU WYZEJ czyli potem styles.nazwaTwojaJAKAS */}
-        <View
-          style={{
-            flexDirection: 'row',
-            padding: 16,
-            borderBottomWidth: 0.25,
-            borderColor: 'rgba(0,0,0,0.25)',
-            justifyContent: 'space-between'
-          }}
-        >
+        {/* TE STYLE PRZENIES NA DOL PLIKU, TAK JAK JEST TU WYZEJ czyli potem styles.nazwaTwojaJAKAS */}
+        <View style={styles.body}>
           {/* TU MOZESZ DODAC POGRUBIONY ALBO TROCHE WIEKSZY TEN TEKST */}
-          <Text>Aktualizuj co:</Text>
+          <Text style={styles.bodyText}>Aktualizuj co:</Text>
 
           {/* W SUMIE TU TEZ */}
           <TextInput
+            style={styles.bodyText}
             value={this.state.interval.toString()}
             onChangeText={text => {
               this.setState({ interval: text });
@@ -50,7 +43,7 @@ class Settings extends Component {
         </View>
         {/* TUTAJ MOZESZ DODAC MARGINES NA TEN BUTTON ZEBY NIE BYL NA CALA SZEROKOSC */}
         {/* ZOBACZ SOBIE JAK DZIALA TEN REDUX NA TYM PRZYKLADZIE  */}
-        <View style={{ paddingTop: 5 }}>
+        <View style={{ paddingTop: 5, paddingHorizontal: 30}}>
           <Button
             title="Zapisz"
             onPress={() => {
@@ -67,7 +60,7 @@ class Settings extends Component {
         </View>
       </View>
     );
-  }
+  } 
 }
 //TUTAJ DODAJE TE STYLE Z GORY
 const styles = StyleSheet.create({
@@ -85,7 +78,19 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#fff',
     letterSpacing: 5
+  },
+  body: {
+    flexDirection: 'row',
+    padding: 16,
+    borderBottomWidth: 0.25,
+    borderColor: 'rgba(0,0,0,0.25)',
+    justifyContent: 'space-between'
+  },
+  bodyText: {
+    fontWeight: 'bold', 
+    fontSize: 20
   }
+
 });
 //TUAJ SIE LACZY Z REDUXEM I POBIERAMY ZMIENNE Z GLOBALNEGO STANU KTORE SA NAM POTRZEBNE W TYM KOMPONENCIE
 const mapStateToProps = state => ({
