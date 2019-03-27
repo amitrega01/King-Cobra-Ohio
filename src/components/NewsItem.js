@@ -1,5 +1,27 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import HTML from 'react-native-render-html';
+import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
+export default class NewsItem extends Component {
+  render() {
+    return (
+      <TouchableOpacity
+        style={[styles.container, styles.Shadow, styles.Background]}
+        onPress={() => alert(this.props.source)}
+      >
+        <Text style={styles.Header}>{this.props.title}</Text>
+        <Text style={styles.Data}>{this.props.date}</Text>
+        <HTML
+          tagsStyles={{
+            p: { textAlign: 'justify' }
+          }}
+          html={this.props.content}
+          ignoredTags={[...IGNORED_TAGS, 'a', 'img']}
+        />
+      </TouchableOpacity>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   Header: {
@@ -10,10 +32,12 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    borderRadius: 10,
-    borderWidth: 1,
+    marginHorizontal: 16,
+    marginTop: 8,
+    borderRadius: 12,
+    borderWidth: 0.25,
     borderColor: 'rgb(114, 114, 142)',
-    padding: 10
+    padding: 12
   },
 
   Data: {
@@ -22,43 +46,10 @@ const styles = StyleSheet.create({
   },
 
   Shadow: {
-    elevation: 7
+    elevation: 4
   },
 
   Background: {
     backgroundColor: '#ffffff'
   }
 });
-
-export default class NewsItem extends Component {
-  render() {
-    return (
-      <TouchableOpacity
-        style={[styles.container, styles.Shadow, styles.Background]}
-        onPress={this.props.source}
-      >
-        <Text style={styles.Header}>{this.props.title}</Text>
-        <Text style={styles.Data}>{this.props.date}</Text>
-
-        <Text>{this.props.content}</Text>
-      </TouchableOpacity>
-    );
-  }
-}
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    elevation: 2,
-    padding: 16,
-    borderRadius: 16,
-    marginVertical: 8,
-    marginHorizontal: 12
-  },
-  Header: {
-    fontSize: 20,
-    color: 'rgba(0,0,0,0.75)',
-    textAlign: 'justify',
-    fontWeight: 'bold',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
