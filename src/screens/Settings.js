@@ -4,14 +4,22 @@ import Styles from '../consts/Styles';
 export default class Settings extends Component {
   static navigationOptions = {
     header: null
+    
   };
   render() {
+    this.state = {darkMode: false}
     return (
-      <View style={Styles.mainContainer}>
-        <Text>Placeholder</Text>
+      <View style={{flexdirection: 'row'}}>
+        <View>
+          <Text>Dark mode</Text>
+          <CheckBox 
+          value={this.state.darkMode} 
+          onValueChange={(value) => this.setState({darkMode: value})} 
+          />
+        </View>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({});
+
