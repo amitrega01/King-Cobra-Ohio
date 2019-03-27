@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import { Button, TextInput, Text, StyleSheet, View } from 'react-native';
+import {
+  Button,
+  TextInput,
+  Text,
+  StyleSheet,
+  View,
+  TouchableOpacity
+} from 'react-native';
 import Strings from '../consts/Strings';
 import Colors from '../consts/Colors';
 import { connect } from 'react-redux';
+import { Ionicons } from '@expo/vector-icons';
 
 class Settings extends Component {
   static navigationOptions = {
@@ -18,20 +26,21 @@ class Settings extends Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View>
-        {/* nagłowek */}
-
         <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => navigate('Home')}
+            style={{ paddingVertical: 16, paddingLeft: 16 }}
+          >
+            <Ionicons name="md-arrow-back" size={32} color="white" />
+          </TouchableOpacity>
           <Text style={styles.headerText}>{Strings.settings}</Text>
         </View>
-
-        {/* TE STYLE PRZENIES NA DOL PLIKU, TAK JAK JEST TU WYZEJ czyli potem styles.nazwaTwojaJAKAS */}
         <View style={styles.body}>
-          {/* TU MOZESZ DODAC POGRUBIONY ALBO TROCHE WIEKSZY TEN TEKST */}
           <Text style={styles.bodyText}>Aktualizuj co:</Text>
-
-          {/* W SUMIE TU TEZ */}
           <TextInput
             style={styles.bodyText}
             value={this.state.interval.toString()}
@@ -41,10 +50,9 @@ class Settings extends Component {
             keyboardType="numeric"
           />
         </View>
-        {/* TUTAJ MOZESZ DODAC MARGINES NA TEN BUTTON ZEBY NIE BYL NA CALA SZEROKOSC */}
-        {/* ZOBACZ SOBIE JAK DZIALA TEN REDUX NA TYM PRZYKLADZIE  */}
-        <View style={{ paddingTop: 5, paddingHorizontal: 30}}>
+        <View style={{ paddingTop: 5, paddingHorizontal: 30 }}>
           <Button
+            color={Colors.mainColor}
             title="Zapisz"
             onPress={() => {
               this.props.dispatch({
@@ -55,19 +63,19 @@ class Settings extends Component {
                 type: 'TOOGLE_DARKMODE',
                 darkMode: this.state.darkMode
               });
+              navigate('Home');
             }}
           />
         </View>
       </View>
     );
-  } 
+  }
 }
-//TUTAJ DODAJE TE STYLE Z GORY
 const styles = StyleSheet.create({
   header: {
     backgroundColor: Colors.mainColor,
     elevation: 4,
-    flexDirection: 'column',
+    flexDirection: 'row',
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
     paddingTop: 24
@@ -87,10 +95,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   bodyText: {
-    fontWeight: 'bold', 
     fontSize: 20
   }
-
 });
 //TUAJ SIE LACZY Z REDUXEM I POBIERAMY ZMIENNE Z GLOBALNEGO STANU KTORE SA NAM POTRZEBNE W TYM KOMPONENCIE
 const mapStateToProps = state => ({
