@@ -1,14 +1,17 @@
-import rssFetch from './utils/rssFetch';
 import { AsyncStorage } from 'react-native';
 
-const initialState = {};
+const initialState = {
+  interval: 7200000,
+  darkMode: false
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'SET_ACTIVE': {
       return {
         url: state.url,
-
+        interval: state.interval,
+        darkMode: state.darkMode,
         lastUpdate: state.lastUpdate,
         channels: state.channels.map(channel =>
           channel.id === action.id
@@ -25,11 +28,28 @@ export default (state = initialState, action) => {
         lastUpdate: action.lastUpdate,
         url: action.url,
         channels: action.rss,
-        active: action.active
+        active: action.active,
+        interval: state.interval,
+        darkMode: state.darkMode
       };
       saveStateToStorage(tmpState);
       return tmpState;
       break;
+    }
+    case 'SET_INTERVAL': {
+      var temp = state;
+      console.log('NEW INTERVAL');
+      console.log(action.newInterval);
+      temp.interval = action.newInterval;
+      saveStateToStorage(temp);
+      return temp;
+    }
+
+    case 'TOOGLE_DARKMODE': {
+      var temp = state;
+      temp.darkMode = action.darkMode;
+      saveStateToStorage(temp);
+      return temp;
     }
     case 'GET_STATE_FROM_STORAGE': {
       return action.localState;
