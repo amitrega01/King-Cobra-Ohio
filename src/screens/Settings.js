@@ -5,7 +5,8 @@ import {
   Text,
   StyleSheet,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  CheckBox
 } from 'react-native';
 import Strings from '../consts/Strings';
 import Colors from '../consts/Colors';
@@ -13,8 +14,6 @@ import { connect } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
 
 class Settings extends Component {
-    this.state = { darkMode: false };
-  CheckBox,
   static navigationOptions = {
     header: null
   };
@@ -41,6 +40,7 @@ class Settings extends Component {
           </TouchableOpacity>
           <Text style={styles.headerText}>{Strings.settings}</Text>
         </View>
+
         <View style={styles.body}>
           <Text style={styles.bodyText}>Aktualizuj co: (h)</Text>
           <TextInput
@@ -52,6 +52,15 @@ class Settings extends Component {
             keyboardType="numeric"
           />
         </View>
+
+        <View style={styles.body}>
+          <Text style={styles.bodyText}>Dark mode</Text>
+          <CheckBox
+            value={this.state.darkMode}
+            onValueChange={value => this.setState({ darkMode: value })}
+          />
+        </View>
+
         <View style={{ paddingTop: 5, paddingHorizontal: 30 }}>
           <Button
             color={Colors.mainColor}
@@ -67,19 +76,6 @@ class Settings extends Component {
               });
               navigate('Home');
             }}
-          />
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            padding: 16,
-            justifyContent: 'space-between'
-          }}
-        >
-          <Text>Dark mode</Text>
-          <CheckBox
-            value={this.state.darkMode}
-            onValueChange={value => this.setState({ darkMode: value })}
           />
         </View>
       </View>
