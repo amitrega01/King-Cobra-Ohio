@@ -1,5 +1,3 @@
-### Akademia Techniczno - Humanistyczna w Bielsku-Białej
-
 # Czytnik RSS w React Native
 
 ## Skład grupy
