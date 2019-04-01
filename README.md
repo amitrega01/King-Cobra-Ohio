@@ -35,7 +35,7 @@ Zarządzanie projektem odbywa się za pomocą serwisu ClickUp.
 
 ## Struktura projektu
 
-![](https://i.imgur.com/uSE3c76.png)
+![Struktura projektu](https://i.imgur.com/uSE3c76.png)
 
 Aplikacja została podzielona na komponenty:
 
@@ -51,16 +51,16 @@ Aplikacja oferuje dwa motywy: standardowy oraz tryb ciemny
 
 ### Standardowy
 
-![](https://i.imgur.com/7sFIcAS.png)
+![Standard mode](https://i.imgur.com/7sFIcAS.png)
 
 ### Tryb ciemny
 
-![](https://i.imgur.com/nsof9wz.png)
+![Dark mode](https://i.imgur.com/nsof9wz.png)
 
 ## Działanie aplikacji
 
 Aplikacja aktualizuje wiadomości przy urrochomieniu oraz co wybrany interwał czasu (w godzinach). Lista kanałów znajduje się w nagłowku, gdzie możemy przełączać sie pomiedzy wybranym kanałem.
-![](https://i.imgur.com/gqi4w8q.png)
+![Header](https://i.imgur.com/gqi4w8q.png)
 
 Po dotknięciu wiadomości, zostaje ona otworzona w domyślnej przeglądarce użytkownika.
 
@@ -70,7 +70,7 @@ Po dotknięciu wiadomości, zostaje ona otworzona w domyślnej przeglądarce uż
 
 Przycisk z nazwą kanału znajdujący się w nagłowku.
 
-```
+```js
 import React, { Component } from 'react';
 import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
@@ -125,14 +125,13 @@ const styles = StyleSheet.create({
     color: '#fff'
   }
 });
-
 ```
 
 Komponent renderuje odpowiednią wersję przycisku - aktywny ( z białym tłem) i nie aktywny (bez tła)w zależności od podanych argumentów (props'ów).
 
 ### Funkcja przetwarzająca plik XML kanału RSS newsFetch
 
-```
+```js
 export async function newsFetch(channel) {
   await fetch(channel.url)
     .then(response => response.text())
